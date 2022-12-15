@@ -1,0 +1,5 @@
+export {default as AuthPage } from './AuthPage'
+export {default as NotFound } from './NotFound'
+export {default as StoreDetail } from './StoreDetail'
+export {default as ProductDetail } from './ProductDetail'
+export {default as AboutPage } from './AboutPage'

@@ -3,12 +3,11 @@ import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
 
-import Navbar from "./components/Navbar/Navbar";
+import {Navbar} from "./components";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
+import { AboutPage, AuthPage, NotFound, ProductDetail, StoreDetail } from "./pages";
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
           path="/profile"
           element={
             <IsPrivate>
-              <ProfilePage />
+            <ProfilePage />
             </IsPrivate>
           }
         />
@@ -31,7 +30,7 @@ function App() {
           path="/signup"
           element={
             <IsAnon>
-              <SignupPage />
+              <AuthPage />
             </IsAnon>
           }
         />
@@ -39,10 +38,41 @@ function App() {
           path="/login"
           element={
             <IsAnon>
-              <LoginPage />
+              <AuthPage />
             </IsAnon>
           }
         />
+
+        <Route
+          path="/store/:id/detail"
+          element={
+            
+              <StoreDetail />
+           
+          }
+        />
+        <Route
+          path="/product/:id/detail"
+          element={
+            
+              <ProductDetail />
+           
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            
+              <AboutPage />
+           
+          }
+        />
+
+
+
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
