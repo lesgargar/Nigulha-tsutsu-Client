@@ -64,6 +64,10 @@ export default function ModalProductForm({ editProduct={},changeItem, isOpen, on
     onClose();
     setName("");
     setDescription("");
+    setPreview("https://cdn-icons-png.flaticon.com/512/1170/1170577.png");
+    setDetail("")
+    setPrice(0)
+
   };
   const validateField = () => {
     return !(name.length && description.length);
