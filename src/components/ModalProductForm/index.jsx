@@ -64,6 +64,10 @@ export default function ModalProductForm({ editProduct={},changeItem, isOpen, on
     onClose();
     setName("");
     setDescription("");
+    setPreview("");
+    setDetail("")
+    setPrice(0)
+
   };
   const validateField = () => {
     return !(name.length && description.length);
