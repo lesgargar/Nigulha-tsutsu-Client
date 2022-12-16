@@ -155,10 +155,10 @@ export default function ProfilePage() {
                   ))
                 ) : (
                   <EmptyMessage
-                    title={"Products"}
-                    subTitle={"You dont have any products yet"}
-                    desription={"Add your first product"}
-                    buttonText={"Create your first product"}
+                    title={"Reviews"}
+                    subTitle={"Reviews not available"}
+                    desription={"Login to see what people say"}
+                    buttonText={"or Login to Review this"}
                     onClick={onOpen}
                   />
                 )}

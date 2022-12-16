@@ -103,6 +103,8 @@ export default function Navbar() {
               fontWeight={400}
               variant={"link"}
               href={"/login"}
+              color={"white"}
+              bg={"purple.400"}
             >
               Login
             </Button>
