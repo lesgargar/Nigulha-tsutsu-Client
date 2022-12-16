@@ -107,7 +107,7 @@ export default function ModalStoreForm({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your store</ModalHeader>
+          <ModalHeader>Edit profile</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Avatar size="2xl" name="Segun Adebayo" src={preview} />

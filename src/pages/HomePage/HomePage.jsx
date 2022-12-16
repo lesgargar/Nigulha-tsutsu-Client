@@ -26,7 +26,7 @@ function HomePage() {
       </Flex>
       <Flex justify={"center"} align={"center"}>
       <Box width={"40vh"} >
-          Meet the comunity and explore the stores below 🫶
+          Meet the community and explore the stores below 🫶
         </Box>
       </Flex>
       <SimpleGrid columns={[2, null, 3]} spacing="40px">
