@@ -58,6 +58,7 @@ export default function AuthPage() {
         navigate("/");
       })
       .catch((error) => {
+        console.log("error",error)
         const errorDescription = error.response.data.errorMessage ||   error.response.data.message
         setErrorMessage(errorDescription);
         toast({
