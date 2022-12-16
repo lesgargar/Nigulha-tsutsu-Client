@@ -3,7 +3,6 @@ import axios from 'axios';
 const isProduction = process.env.NODE_ENV === "production";
 const _api = axios.create({
     baseURL: isProduction ? process.env.REACT_APP_SERVER_URL_PROD :   process.env.REACT_APP_SERVER_URL_DEV,
-
 })
 
 

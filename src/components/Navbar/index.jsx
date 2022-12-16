@@ -150,8 +150,8 @@ const DesktopNav = ({ isLoggedIn }) => {
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {newNavBar.map((navItem) => (
-        <Flex align={'center'}>
+      {newNavBar.map((navItem,index) => (
+        <Flex key={index} align={'center'}>
         <Box key={navItem.label} >
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>

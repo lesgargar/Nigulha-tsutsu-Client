@@ -16,7 +16,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 
-import { EmptyMessage, CardStore, ModalStoreForm } from "../../components";
+import { EmptyMessage, CardStore, ModalStoreForm, ModalEditProfile, Loading } from "../../components";
 import { AuthContext } from "../../context/auth.context";
 import { myProfileEP } from "../../services/user.service";
 import { deleteStoreEP, getAllMyStoresEP } from "../../services/store.service";
@@ -27,13 +27,17 @@ export default function ProfilePage({}) {
   const [stores, setStores] = useState([]);
   const [editStore,setEditStore]= useState({})
   const { logOutUser } = useContext(AuthContext);
-
+  const [loading,setLoading] = useState(true)
   const getData = async()=>{
     try {
       const { data:userData } = await myProfileEP()
       const { data:storeData } = await getAllMyStoresEP()
+
+      
+      
       setUser(userData.user)
       setStores(storeData.result)
+      setLoading(false)
     } catch (error) {
       
     }
@@ -57,7 +61,10 @@ export default function ProfilePage({}) {
     setEditStore({})
   }
 
-
+const changeUser = (newUser) => {
+  
+  setUser(newUser)
+}
 
 
 
@@ -65,8 +72,9 @@ export default function ProfilePage({}) {
     getData()
   },[])
 
-
+  
   return (
+    
     <Container maxW={"7xl"}>
       <SimpleGrid
         columns={{ base: 1, }}
@@ -74,7 +82,8 @@ export default function ProfilePage({}) {
         py={{ base: 18, md: 24 }}
       >
         <Flex>
-          <SidebarContent onOpen={onOpen}  {...user} onLogout={()=>logOutUser()}/>
+          {loading ? <Loading/>:
+          <SidebarContent onOpenModalStore={onOpen} changeUser={changeUser}  user ={user} onLogout={()=>logOutUser()}/>}
         </Flex>
         <Stack
 
@@ -116,12 +125,15 @@ export default function ProfilePage({}) {
           </Stack>
         </Stack>
       </SimpleGrid>
+      
       <ModalStoreForm {...{ isOpen, onOpen, onClose,editStore,changeItem }} createStore={(res)=>setStores(prevState=>[...prevState,res])} />
     </Container>
   );
 }
 
-const SidebarContent = ({ onOpen, ...rest }) => {
+const SidebarContent = ({ onOpenModalStore,user,changeUser, ...rest }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -144,11 +156,11 @@ const SidebarContent = ({ onOpen, ...rest }) => {
         <VStack>
           <Avatar
             size="2xl"
-            name={`${rest.name} ${rest.lastName || ""}`}
-            src={rest.image}
+            name={`${user.name} ${user.lastName || ""}`}
+            src={user.image}
           />
-          <Text>{rest.name} {rest.lastName || ""}</Text>
-          <Text>{rest.email}</Text>
+          <Text>{user.name} {user.lastName || ""}</Text>
+          <Text>{user.email}</Text>
         </VStack>
 
         <HStack>
@@ -172,12 +184,25 @@ const SidebarContent = ({ onOpen, ...rest }) => {
             _hover={{
               bg: "purple.300",
             }}
-            onClick={onOpen}
+            onClick={onOpenModalStore}
           >
             Create Store
           </Button>
+          <Button
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"purple.400"}
+            _hover={{
+              bg: "purple.300",
+            }}
+            onClick={onOpen}
+          >
+            Edit Profile
+          </Button>
         </HStack>
       </Flex>
+      <ModalEditProfile  {...{ isOpen, onOpen, onClose,user,changeUser }}/>
     </Box>
   );
 };

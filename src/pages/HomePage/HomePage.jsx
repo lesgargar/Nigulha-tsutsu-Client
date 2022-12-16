@@ -14,7 +14,7 @@ function HomePage() {
   };
   useEffect(() => {
     getData();
-  });
+  },[]);
   return (
     <div>
       <Flex justify={"center"} align={"center"}>
